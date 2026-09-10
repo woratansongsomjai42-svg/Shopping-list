@@ -7,6 +7,7 @@ import {
   PiggyBank,
   Receipt,
   Settings,
+  Smile,
   TrendingUp,
   User,
   Wallet,
@@ -27,6 +28,7 @@ const QUICK_LINKS = [
   { href: "/expenses", label: "ส่วนกลาง", icon: Receipt, tint: "bg-primary/15 text-primary" },
   { href: "/personal", label: "ส่วนตัว", icon: PiggyBank, tint: "bg-secondary/20 text-secondary" },
   { href: "/calendar", label: "ปฏิทิน", icon: CalendarDays, tint: "bg-emerald-500/15 text-emerald-600" },
+  { href: "/personal?tab=mood", label: "อารมณ์", icon: Smile, tint: "bg-amber-500/15 text-amber-600" },
 ] as const;
 
 function monthKey(dateStr: string) {
@@ -89,7 +91,7 @@ export function HomeView({ householdId }: { householdId: string }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-5 gap-2">
         {QUICK_LINKS.map(({ href, label, icon: Icon, tint }) => (
           <Link
             key={href}

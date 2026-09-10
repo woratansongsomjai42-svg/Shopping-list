@@ -145,8 +145,14 @@ function TransactionsView({ currentUserId }: { currentUserId: string }) {
   );
 }
 
-export function PersonalLedger({ currentUserId }: { currentUserId: string }) {
-  const [view, setView] = useState<"transactions" | "assets" | "mood">("transactions");
+export function PersonalLedger({
+  currentUserId,
+  initialTab = "transactions",
+}: {
+  currentUserId: string;
+  initialTab?: "transactions" | "assets" | "mood";
+}) {
+  const [view, setView] = useState(initialTab);
 
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
