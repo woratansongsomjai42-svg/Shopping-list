@@ -25,6 +25,8 @@ export type ExpenseCategory =
 
 export type PersonalTransactionType = "income" | "expense";
 
+export type MoodLevel = 1 | 2 | 3 | 4 | 5;
+
 export type PersonalAssetType =
   | "savings"
   | "stock"
@@ -255,6 +257,28 @@ export interface Database {
           updated_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["personal_assets"]["Insert"]>;
+        Relationships: [];
+      };
+      mood_logs: {
+        Row: {
+          id: string;
+          user_id: string;
+          mood_date: string;
+          mood: MoodLevel;
+          note: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          mood_date?: string;
+          mood: MoodLevel;
+          note?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["mood_logs"]["Insert"]>;
         Relationships: [];
       };
       reminders: {

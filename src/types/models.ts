@@ -2,6 +2,7 @@ import type {
   Database,
   ExpenseCategory,
   MemberRole,
+  MoodLevel,
   PersonalAssetType,
   PersonalTransactionType,
   ShoppingCategory,
@@ -11,6 +12,7 @@ import type {
 export type {
   ExpenseCategory,
   MemberRole,
+  MoodLevel,
   PersonalAssetType,
   PersonalTransactionType,
   ShoppingCategory,
@@ -26,6 +28,7 @@ export type ExpenseSplit = Database["public"]["Tables"]["expense_splits"]["Row"]
 export type PersonalTransaction = Database["public"]["Tables"]["personal_transactions"]["Row"];
 export type PersonalAsset = Database["public"]["Tables"]["personal_assets"]["Row"];
 export type Reminder = Database["public"]["Tables"]["reminders"]["Row"];
+export type MoodLog = Database["public"]["Tables"]["mood_logs"]["Row"];
 
 export type NewShoppingItem = Database["public"]["Tables"]["shopping_items"]["Insert"];
 export type NewExpense = Database["public"]["Tables"]["expenses"]["Insert"];
@@ -33,6 +36,7 @@ export type NewExpenseSplit = Database["public"]["Tables"]["expense_splits"]["In
 export type NewPersonalTransaction = Database["public"]["Tables"]["personal_transactions"]["Insert"];
 export type NewPersonalAsset = Database["public"]["Tables"]["personal_assets"]["Insert"];
 export type NewReminder = Database["public"]["Tables"]["reminders"]["Insert"];
+export type NewMoodLog = Database["public"]["Tables"]["mood_logs"]["Insert"];
 
 /** Balance owed between two members after netting all expense splits. */
 export interface SettlementBalance {
@@ -94,6 +98,22 @@ export const PERSONAL_ASSET_TYPE_LABELS: Record<PersonalAssetType, string> = {
   real_estate: "อสังหาริมทรัพย์",
   gold: "ทองคำ",
   other: "อื่นๆ",
+};
+
+export const MOOD_EMOJI: Record<MoodLevel, string> = {
+  1: "😢",
+  2: "😕",
+  3: "😐",
+  4: "🙂",
+  5: "😄",
+};
+
+export const MOOD_LABELS: Record<MoodLevel, string> = {
+  1: "แย่มาก",
+  2: "ไม่ค่อยดี",
+  3: "เฉยๆ",
+  4: "ดี",
+  5: "ดีมาก",
 };
 
 /** Best-effort mapping used when pre-filling the convert-to-expense form. */

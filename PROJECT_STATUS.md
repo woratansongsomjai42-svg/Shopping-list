@@ -26,6 +26,8 @@ connected, no manual `vercel --prod` needed)
 - Personal income/expense ledger
 - Personal asset/investment portfolio (invested vs. current value, so
   gain/loss shows on the net-worth card)
+- Daily mood tracker (5-point emoji scale + optional note, one entry per day)
+  with a weekly/monthly retrospective view — third tab on `/personal`
 
 **Account**
 - Auth: email/password, Google + GitHub OAuth, forgot/reset password
@@ -54,7 +56,7 @@ connected, no manual `vercel --prod` needed)
 - **Household cap:** 5 households per user, enforced by a DB trigger (shared
   chokepoint for both "create" and "join by invite code").
 - **Migrations are never edited after being applied to production** — each
-  change is a new file (`0001` through `0006` so far in
+  change is a new file (`0001` through `0007` so far in
   `supabase/migrations/`). Run new ones by hand in the Supabase SQL editor;
   there's no CI/CD wired to apply them automatically.
 - **Chart colors** for real data (donut/bar charts) use a separate,
@@ -96,6 +98,3 @@ connected, no manual `vercel --prod` needed)
   100-test-user cap, shows an unverified-app warning) or keep manually adding
   testers — no action needed unless Google sign-in becomes a blocker for real
   family members.
-- No other open work is tracked right now — this file should be updated as a
-  quick "what's the state of things" reference whenever a new feature or fix
-  lands, since nothing else in the repo captures decision history like this.

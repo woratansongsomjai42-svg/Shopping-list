@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { AddPersonalTransactionDialog } from "@/components/personal/add-personal-transaction-dialog";
 import { AssetList } from "@/components/personal/asset-list";
+import { MoodTracker } from "@/components/personal/mood-tracker";
 import { BottomNav } from "@/components/nav/bottom-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -145,7 +146,7 @@ function TransactionsView({ currentUserId }: { currentUserId: string }) {
 }
 
 export function PersonalLedger({ currentUserId }: { currentUserId: string }) {
-  const [view, setView] = useState<"transactions" | "assets">("transactions");
+  const [view, setView] = useState<"transactions" | "assets" | "mood">("transactions");
 
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
@@ -154,7 +155,7 @@ export function PersonalLedger({ currentUserId }: { currentUserId: string }) {
         <p className="text-sm text-muted-foreground">เห็นได้เฉพาะคุณเท่านั้น</p>
       </div>
 
-      <Tabs value={view} onValueChange={(v) => v && setView(v as "transactions" | "assets")}>
+      <Tabs value={view} onValueChange={(v) => v && setView(v as "transactions" | "assets" | "mood")}>
         <TabsList className="w-full">
           <TabsTrigger value="transactions" className="flex-1">
             ธุรกรรม
@@ -162,14 +163,15 @@ export function PersonalLedger({ currentUserId }: { currentUserId: string }) {
           <TabsTrigger value="assets" className="flex-1">
             ทรัพย์สิน
           </TabsTrigger>
+          <TabsTrigger value="mood" className="flex-1">
+            อารมณ์
+          </TabsTrigger>
         </TabsList>
       </Tabs>
 
-      {view === "transactions" ? (
-        <TransactionsView currentUserId={currentUserId} />
-      ) : (
-        <AssetList currentUserId={currentUserId} />
-      )}
+      {view === "transactions" && <TransactionsView currentUserId={currentUserId} />}
+      {view === "assets" && <AssetList currentUserId={currentUserId} />}
+      {view === "mood" && <MoodTracker currentUserId={currentUserId} />}
 
       <BottomNav />
     </div>
