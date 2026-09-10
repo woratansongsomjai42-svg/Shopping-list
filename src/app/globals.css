@@ -49,72 +49,79 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* Cute & cozy — warm peach/coral palette */
+  --background: #fffdf9;
+  --foreground: #2d3748;
+  --card: #ffffff;
+  --card-foreground: #2d3748;
+  --popover: #ffffff;
+  --popover-foreground: #2d3748;
+  --primary: #ff8a65;
+  --primary-foreground: #2d3748;
+  --secondary: #ffa726;
+  --secondary-foreground: #2d3748;
+  --muted: #fbf3e7;
+  --muted-foreground: #64748b;
+  --accent: #fff9c4;
+  --accent-foreground: #2d3748;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #f3ede2;
+  --input: #f3ede2;
+  --ring: #ff8a65;
+  --chart-1: #ff8a65;
+  --chart-2: #ffa726;
+  --chart-3: #fff59d;
+  --chart-4: #4a3aa7;
+  --chart-5: #1baf7a;
+  --radius: 1.1rem;
+  --sidebar: #fffdf9;
+  --sidebar-foreground: #2d3748;
+  --sidebar-primary: #ff8a65;
+  --sidebar-primary-foreground: #2d3748;
+  --sidebar-accent: #fff9c4;
+  --sidebar-accent-foreground: #2d3748;
+  --sidebar-border: #f3ede2;
+  --sidebar-ring: #ff8a65;
+  --shadow-warm: 0 4px 20px -2px rgba(255, 138, 101, 0.14);
+  --shadow-warm-lg: 0 12px 28px -6px rgba(255, 138, 101, 0.22);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
+  --background: #241a12;
+  --foreground: #fdf6ec;
+  --card: #2f2318;
+  --card-foreground: #fdf6ec;
+  --popover: #2f2318;
+  --popover-foreground: #fdf6ec;
+  --primary: #ff9e80;
+  --primary-foreground: #2d1b12;
+  --secondary: #ffb74d;
+  --secondary-foreground: #2d1b12;
+  --muted: #3a2c1e;
+  --muted-foreground: #c9b8a3;
+  --accent: #4a3d24;
+  --accent-foreground: #fff9c4;
+  --destructive: #ef5350;
+  --destructive-foreground: #2d1b12;
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --ring: #ff9e80;
+  --chart-1: #ff9e80;
+  --chart-2: #ffb74d;
+  --chart-3: #fff59d;
+  --chart-4: #9085e9;
+  --chart-5: #1baf7a;
+  --sidebar: #2f2318;
+  --sidebar-foreground: #fdf6ec;
+  --sidebar-primary: #ff9e80;
+  --sidebar-primary-foreground: #2d1b12;
+  --sidebar-accent: #4a3d24;
+  --sidebar-accent-foreground: #fff9c4;
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: #ff9e80;
+  --shadow-warm: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+  --shadow-warm-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.4);
 }
 
 @layer base {
@@ -126,5 +133,14 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .shadow-warm {
+    box-shadow: var(--shadow-warm);
+  }
+  .shadow-warm-lg {
+    box-shadow: var(--shadow-warm-lg);
   }
 }

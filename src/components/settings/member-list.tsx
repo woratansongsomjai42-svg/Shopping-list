@@ -66,7 +66,7 @@ export function MemberList({
         return (
           <div
             key={member.user_id}
-            className="flex items-center gap-3 rounded-lg border bg-card p-3"
+            className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-warm ring-1 ring-border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-warm-lg"
           >
             <div className="min-w-0 flex-1">
               <p className="truncate font-medium">

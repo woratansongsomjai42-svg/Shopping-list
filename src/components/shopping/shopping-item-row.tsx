@@ -10,7 +10,7 @@ import { SHOPPING_CATEGORY_LABELS, URGENCY_LABELS, type ShoppingItem } from "@/t
 import { cn } from "@/lib/utils";
 
 const URGENCY_STYLES: Record<ShoppingItem["urgency"], string> = {
-  urgent: "border-red-200 bg-red-50 text-red-700",
+  urgent: "border-transparent bg-destructive/10 text-destructive",
   normal: "border-transparent",
   backup: "border-transparent bg-muted text-muted-foreground",
 };
@@ -39,12 +39,11 @@ export function ShoppingItemRow({
   const needsConversion = item.is_purchased && !item.converted_expense_id;
 
   return (
-    <div className="flex items-center gap-3 rounded-lg border bg-card p-3">
+    <div className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-warm ring-1 ring-border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-warm-lg">
       <Checkbox
         checked={item.is_purchased}
         disabled={toggleMutation.isPending}
         onCheckedChange={(checked) => toggleMutation.mutate(checked === true)}
-        className="size-5"
       />
 
       <div className="min-w-0 flex-1">

@@ -1,12 +1,13 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Settings } from "lucide-react";
+import { ShoppingBasket, Settings } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AddItemDialog } from "@/components/shopping/add-item-dialog";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { BottomNav } from "@/components/nav/bottom-nav";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConvertToExpenseDialog } from "@/components/shopping/convert-to-expense-dialog";
 import { ShoppingItemRow } from "@/components/shopping/shopping-item-row";
@@ -47,7 +48,10 @@ export function ShoppingList({
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold">รายการของที่ต้องซื้อ</h1>
-          <p className="text-sm text-muted-foreground">เหลือ {remainingCount} รายการ</p>
+          <div className="mt-1 flex items-center gap-1.5">
+            <Badge variant="accent">เหลือ {remainingCount}</Badge>
+            <span className="text-sm text-muted-foreground">รายการ</span>
+          </div>
         </div>
         <div className="flex items-center gap-1">
           <AddItemDialog householdId={householdId} currentUserId={currentUserId} />
@@ -63,9 +67,10 @@ export function ShoppingList({
       {isLoading && <p className="text-sm text-muted-foreground">กำลังโหลด...</p>}
 
       {!isLoading && items.length === 0 && (
-        <p className="py-12 text-center text-sm text-muted-foreground">
-          ยังไม่มีของที่ต้องซื้อ กดปุ่ม + เพื่อเพิ่มรายการ
-        </p>
+        <div className="flex flex-col items-center gap-2 py-12 text-center text-sm text-muted-foreground">
+          <ShoppingBasket className="size-8 text-secondary" />
+          <p>ยังไม่มีของที่ต้องซื้อ 🧺 กดปุ่ม + เพื่อเพิ่มรายการแรก</p>
+        </div>
       )}
 
       {groups.map(([category, categoryItems]) => (

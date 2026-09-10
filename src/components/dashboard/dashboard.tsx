@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { Wallet } from "lucide-react";
 import { useMemo } from "react";
 import {
   Bar,
@@ -89,11 +90,14 @@ export function Dashboard({ householdId }: { householdId: string }) {
       <h1 className="text-xl font-semibold">สรุปรายจ่าย</h1>
 
       <Card>
-        <CardHeader>
-          <CardTitle className="text-sm font-medium text-muted-foreground">รวมเดือนนี้</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-3xl font-semibold">฿{currentMonthTotal.toFixed(2)}</p>
+        <CardContent className="flex items-center gap-3">
+          <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent text-secondary">
+            <Wallet className="size-6" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">รวมเดือนนี้</p>
+            <p className="text-3xl font-semibold text-primary">฿{currentMonthTotal.toFixed(2)}</p>
+          </div>
         </CardContent>
       </Card>
 

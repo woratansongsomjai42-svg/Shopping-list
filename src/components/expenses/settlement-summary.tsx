@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { useMemo } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -50,8 +50,9 @@ export function SettlementSummary({
   if (isLoading) return null;
   if (balances.length === 0) {
     return (
-      <div className="rounded-lg border bg-card p-3 text-sm text-muted-foreground">
-        ทุกคนเคลียร์หนี้กันหมดแล้ว
+      <div className="flex items-center gap-2 rounded-2xl bg-accent/50 p-3 text-sm text-foreground ring-1 ring-border">
+        <Sparkles className="size-4 shrink-0 text-secondary" />
+        ทุกคนเคลียร์หนี้กันหมดแล้ว เย่!
       </div>
     );
   }
@@ -62,7 +63,7 @@ export function SettlementSummary({
       {balances.map((balance) => (
         <div
           key={`${balance.fromUserId}-${balance.toUserId}`}
-          className="flex items-center gap-2 rounded-lg border bg-card p-3"
+          className="flex items-center gap-2 rounded-2xl bg-card p-3 shadow-warm ring-1 ring-border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-warm-lg"
         >
           <div className="flex min-w-0 flex-1 items-center gap-1.5 text-sm">
             <span className="truncate font-medium">{nameOf(balance.fromUserId)}</span>
