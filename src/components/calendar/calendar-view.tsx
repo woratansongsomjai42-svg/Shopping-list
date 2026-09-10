@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { fetchGoogleCalendarEvents } from "@/lib/google-calendar";
 import { cn } from "@/lib/utils";
 import { deleteReminder, getReminders } from "@/lib/queries/reminders";
+import type { Reminder } from "@/types/models";
 
 const WEEKDAY_LABELS = ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"];
 
@@ -24,6 +25,36 @@ function todayKey() {
 function parseDateKey(key: string) {
   const [year, month, day] = key.split("-").map(Number);
   return new Date(year, month - 1, day);
+}
+
+function ReminderRow({
+  reminder,
+  onDelete,
+  deleting,
+}: {
+  reminder: Reminder;
+  onDelete: (id: string) => void;
+  deleting: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-warm ring-1 ring-border">
+      <div className="min-w-0 flex-1">
+        <p className="truncate font-medium">{reminder.title}</p>
+        <p className="text-xs text-muted-foreground">
+          {reminder.due_time ? reminder.due_time.slice(0, 5) : "ทั้งวัน"}
+          {reminder.note ? ` · ${reminder.note}` : ""}
+        </p>
+      </div>
+      <Button
+        variant="ghost"
+        size="icon"
+        disabled={deleting}
+        onClick={() => onDelete(reminder.id)}
+      >
+        <Trash2 className="size-4" />
+      </Button>
+    </div>
+  );
 }
 
 export function CalendarView({
@@ -201,26 +232,12 @@ export function CalendarView({
         )}
 
         {selectedReminders.map((r) => (
-          <div
+          <ReminderRow
             key={r.id}
-            className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-warm ring-1 ring-border"
-          >
-            <div className="min-w-0 flex-1">
-              <p className="truncate font-medium">{r.title}</p>
-              <p className="text-xs text-muted-foreground">
-                {r.due_time ? r.due_time.slice(0, 5) : "ทั้งวัน"}
-                {r.note ? ` · ${r.note}` : ""}
-              </p>
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              disabled={deleteMutation.isPending}
-              onClick={() => deleteMutation.mutate(r.id)}
-            >
-              <Trash2 className="size-4" />
-            </Button>
-          </div>
+            reminder={r}
+            deleting={deleteMutation.isPending}
+            onDelete={(id) => deleteMutation.mutate(id)}
+          />
         ))}
 
         {selectedGoogleEvents.map((e) => (
@@ -238,6 +255,44 @@ export function CalendarView({
             </div>
           </a>
         ))}
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <h2 className="text-sm font-medium text-muted-foreground">เตือนความจำทั้งหมด</h2>
+
+        {reminders.length === 0 ? (
+          <p className="py-6 text-center text-sm text-muted-foreground">
+            ยังไม่มีเตือนความจำเลย
+          </p>
+        ) : (
+          [...remindersByDate.entries()].map(([date, dateReminders]) => (
+            <section key={date} className="flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => setSelectedDate(date)}
+                className={cn(
+                  "self-start text-xs font-medium underline-offset-2 hover:underline",
+                  date === todayKey() ? "text-primary" : "text-muted-foreground",
+                )}
+              >
+                {parseDateKey(date).toLocaleDateString("th-TH", {
+                  weekday: "short",
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </button>
+              {dateReminders.map((r) => (
+                <ReminderRow
+                  key={r.id}
+                  reminder={r}
+                  deleting={deleteMutation.isPending}
+                  onDelete={(id) => deleteMutation.mutate(id)}
+                />
+              ))}
+            </section>
+          ))
+        )}
       </div>
 
       <BottomNav />
