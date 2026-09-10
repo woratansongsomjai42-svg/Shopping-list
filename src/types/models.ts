@@ -2,6 +2,7 @@ import type {
   Database,
   ExpenseCategory,
   MemberRole,
+  PersonalTransactionType,
   ShoppingCategory,
   UrgencyLevel,
 } from "./database.types";
@@ -9,6 +10,7 @@ import type {
 export type {
   ExpenseCategory,
   MemberRole,
+  PersonalTransactionType,
   ShoppingCategory,
   UrgencyLevel,
 } from "./database.types";
@@ -19,9 +21,12 @@ export type ShoppingItem = Database["public"]["Tables"]["shopping_items"]["Row"]
 export type Expense = Database["public"]["Tables"]["expenses"]["Row"];
 export type ExpenseSplit = Database["public"]["Tables"]["expense_splits"]["Row"];
 
+export type PersonalTransaction = Database["public"]["Tables"]["personal_transactions"]["Row"];
+
 export type NewShoppingItem = Database["public"]["Tables"]["shopping_items"]["Insert"];
 export type NewExpense = Database["public"]["Tables"]["expenses"]["Insert"];
 export type NewExpenseSplit = Database["public"]["Tables"]["expense_splits"]["Insert"];
+export type NewPersonalTransaction = Database["public"]["Tables"]["personal_transactions"]["Insert"];
 
 /** Balance owed between two members after netting all expense splits. */
 export interface SettlementBalance {
@@ -59,6 +64,21 @@ export const EXPENSE_CATEGORY_LABELS: Record<ExpenseCategory, string> = {
   rent: "ค่าเช่า",
   other: "อื่นๆ",
 };
+
+export const PERSONAL_TRANSACTION_TYPE_LABELS: Record<PersonalTransactionType, string> = {
+  income: "รายรับ",
+  expense: "รายจ่าย",
+};
+
+export const PERSONAL_INCOME_CATEGORIES = ["เงินเดือน", "รายได้เสริม", "ของขวัญ", "อื่นๆ"];
+export const PERSONAL_EXPENSE_CATEGORIES = [
+  "อาหาร",
+  "เดินทาง",
+  "ช้อปปิ้ง",
+  "บันเทิง",
+  "สุขภาพ",
+  "อื่นๆ",
+];
 
 /** Best-effort mapping used when pre-filling the convert-to-expense form. */
 export const SHOPPING_TO_EXPENSE_CATEGORY: Record<ShoppingCategory, ExpenseCategory> = {

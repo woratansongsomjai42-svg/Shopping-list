@@ -23,6 +23,8 @@ export type ExpenseCategory =
   | "rent"
   | "other";
 
+export type PersonalTransactionType = "income" | "expense";
+
 export interface Database {
   public: {
     Tables: {
@@ -192,6 +194,32 @@ export interface Database {
           },
         ];
       };
+      personal_transactions: {
+        Row: {
+          id: string;
+          user_id: string;
+          type: PersonalTransactionType;
+          category: string;
+          description: string;
+          amount: number;
+          transaction_date: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          type: PersonalTransactionType;
+          category?: string;
+          description: string;
+          amount: number;
+          transaction_date?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["personal_transactions"]["Insert"]>;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {
@@ -205,6 +233,7 @@ export interface Database {
       shopping_category: ShoppingCategory;
       urgency_level: UrgencyLevel;
       expense_category: ExpenseCategory;
+      personal_transaction_type: PersonalTransactionType;
     };
     CompositeTypes: Record<string, never>;
   };

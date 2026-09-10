@@ -64,7 +64,10 @@ export function ExpenseList({
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">รายจ่าย</h1>
+        <div>
+          <h1 className="text-xl font-semibold">รายจ่ายส่วนกลาง</h1>
+          <p className="text-sm text-muted-foreground">แชร์กันทุกคนในบ้าน</p>
+        </div>
         <AddExpenseDialog householdId={householdId} currentUserId={currentUserId} />
       </div>
 
