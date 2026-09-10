@@ -34,15 +34,6 @@ export type NewPersonalTransaction = Database["public"]["Tables"]["personal_tran
 export type NewPersonalAsset = Database["public"]["Tables"]["personal_assets"]["Insert"];
 export type NewReminder = Database["public"]["Tables"]["reminders"]["Insert"];
 
-/** A Google Calendar event, fetched live and never persisted in our database. */
-export interface GoogleCalendarEvent {
-  id: string;
-  title: string;
-  date: string;
-  time: string | null;
-  htmlLink: string;
-}
-
 /** Balance owed between two members after netting all expense splits. */
 export interface SettlementBalance {
   fromUserId: string;

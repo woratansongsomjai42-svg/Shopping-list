@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import { AddReminderDialog } from "@/components/calendar/add-reminder-dialog";
 import { BottomNav } from "@/components/nav/bottom-nav";
 import { Button } from "@/components/ui/button";
-import { fetchGoogleCalendarEvents } from "@/lib/google-calendar";
 import { cn } from "@/lib/utils";
 import { deleteReminder, getReminders } from "@/lib/queries/reminders";
 import type { Reminder } from "@/types/models";
@@ -73,17 +72,9 @@ export function CalendarView({
 
   const monthLabel = monthCursor.toLocaleDateString("th-TH", { month: "long", year: "numeric" });
 
-  const monthStart = monthCursor;
-  const monthEnd = new Date(monthCursor.getFullYear(), monthCursor.getMonth() + 1, 0, 23, 59, 59);
-
   const { data: reminders = [] } = useQuery({
     queryKey: ["reminders", householdId],
     queryFn: () => getReminders(householdId),
-  });
-
-  const { data: googleEvents } = useQuery({
-    queryKey: ["google-calendar-events", monthCursor.toISOString()],
-    queryFn: () => fetchGoogleCalendarEvents(monthStart, monthEnd),
   });
 
   const deleteMutation = useMutation({
@@ -101,16 +92,6 @@ export function CalendarView({
     }
     return map;
   }, [reminders]);
-
-  const googleEventsByDate = useMemo(() => {
-    const map = new Map<string, NonNullable<typeof googleEvents>>();
-    for (const e of googleEvents ?? []) {
-      const list = map.get(e.date) ?? [];
-      list.push(e);
-      map.set(e.date, list);
-    }
-    return map;
-  }, [googleEvents]);
 
   const weeks = useMemo(() => {
     const firstDay = new Date(monthCursor.getFullYear(), monthCursor.getMonth(), 1);
@@ -136,7 +117,6 @@ export function CalendarView({
   }, [monthCursor]);
 
   const selectedReminders = remindersByDate.get(selectedDate) ?? [];
-  const selectedGoogleEvents = googleEventsByDate.get(selectedDate) ?? [];
 
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
@@ -188,7 +168,6 @@ export function CalendarView({
               const isSelected = key === selectedDate;
               const isToday = key === todayKey();
               const hasReminders = remindersByDate.has(key);
-              const hasGoogleEvents = googleEventsByDate.has(key);
 
               return (
                 <button
@@ -205,10 +184,7 @@ export function CalendarView({
                   )}
                 >
                   {date.getDate()}
-                  <span className="flex gap-0.5">
-                    {hasReminders && <span className="size-1 rounded-full bg-secondary" />}
-                    {hasGoogleEvents && <span className="size-1 rounded-full bg-emerald-600" />}
-                  </span>
+                  {hasReminders && <span className="size-1 rounded-full bg-secondary" />}
                 </button>
               );
             })}
@@ -225,7 +201,7 @@ export function CalendarView({
           })}
         </h2>
 
-        {selectedReminders.length === 0 && selectedGoogleEvents.length === 0 && (
+        {selectedReminders.length === 0 && (
           <p className="py-6 text-center text-sm text-muted-foreground">
             ไม่มีรายการวันนี้ กดปุ่ม + เพื่อเพิ่มเตือนความจำ
           </p>
@@ -238,22 +214,6 @@ export function CalendarView({
             deleting={deleteMutation.isPending}
             onDelete={(id) => deleteMutation.mutate(id)}
           />
-        ))}
-
-        {selectedGoogleEvents.map((e) => (
-          <a
-            key={e.id}
-            href={e.htmlLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-warm ring-1 ring-border"
-          >
-            <span className="size-2 shrink-0 rounded-full bg-emerald-600" />
-            <div className="min-w-0 flex-1">
-              <p className="truncate font-medium">{e.title}</p>
-              <p className="text-xs text-muted-foreground">{e.time ?? "ทั้งวัน"} · Google</p>
-            </div>
-          </a>
         ))}
       </div>
 

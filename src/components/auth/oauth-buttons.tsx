@@ -13,18 +13,7 @@ export function OAuthButtons() {
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider,
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/shopping`,
-        // Requesting calendar access here (rather than only on the calendar
-        // page) so a single Google sign-in covers both login and calendar
-        // sync — asking again later would mean a second consent screen.
-        ...(provider === "google"
-          ? {
-              scopes: "https://www.googleapis.com/auth/calendar.readonly",
-              queryParams: { access_type: "offline", prompt: "consent" },
-            }
-          : {}),
-      },
+      options: { redirectTo: `${window.location.origin}/auth/callback?next=/shopping` },
     });
   }
 
