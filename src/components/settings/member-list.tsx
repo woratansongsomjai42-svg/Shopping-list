@@ -68,6 +68,15 @@ export function MemberList({
             key={member.user_id}
             className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-warm ring-1 ring-border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-warm-lg"
           >
+            <div className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent text-sm font-semibold text-accent-foreground">
+              {member.avatar_url ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={member.avatar_url} alt="" className="size-full object-cover" />
+              ) : (
+                (member.display_name?.trim().charAt(0).toUpperCase() ?? "?")
+              )}
+            </div>
+
             <div className="min-w-0 flex-1">
               <p className="truncate font-medium">
                 {member.display_name ?? "สมาชิก"}

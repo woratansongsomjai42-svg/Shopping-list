@@ -1,11 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { ShoppingBasket, Settings } from "lucide-react";
+import { ShoppingBasket, Settings, User } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AddItemDialog } from "@/components/shopping/add-item-dialog";
-import { LogoutButton } from "@/components/auth/logout-button";
 import { BottomNav } from "@/components/nav/bottom-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -60,7 +59,11 @@ export function ShoppingList({
               <Settings className="size-4" />
             </Button>
           </Link>
-          <LogoutButton />
+          <Link href="/profile">
+            <Button variant="ghost" size="icon" title="โปรไฟล์">
+              <User className="size-4" />
+            </Button>
+          </Link>
         </div>
       </div>
 

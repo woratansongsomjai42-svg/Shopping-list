@@ -61,6 +61,7 @@ export interface Database {
           user_id: string;
           role: MemberRole;
           display_name: string | null;
+          avatar_url: string | null;
           joined_at: string;
         };
         Insert: {
@@ -68,6 +69,7 @@ export interface Database {
           user_id: string;
           role?: MemberRole;
           display_name?: string | null;
+          avatar_url?: string | null;
           joined_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["household_members"]["Insert"]>;
