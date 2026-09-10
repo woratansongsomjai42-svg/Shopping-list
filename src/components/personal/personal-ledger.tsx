@@ -2,13 +2,15 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PiggyBank, Trash2, TrendingDown, TrendingUp, Wallet } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { AddPersonalTransactionDialog } from "@/components/personal/add-personal-transaction-dialog";
+import { AssetList } from "@/components/personal/asset-list";
 import { BottomNav } from "@/components/nav/bottom-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   deletePersonalTransaction,
   getPersonalTransactions,
@@ -23,7 +25,7 @@ function monthKey(dateStr: string) {
   return dateStr.slice(0, 7);
 }
 
-export function PersonalLedger({ currentUserId }: { currentUserId: string }) {
+function TransactionsView({ currentUserId }: { currentUserId: string }) {
   const queryClient = useQueryClient();
 
   const { data: transactions = [], isLoading } = useQuery({
@@ -63,12 +65,8 @@ export function PersonalLedger({ currentUserId }: { currentUserId: string }) {
   }, [transactions]);
 
   return (
-    <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-semibold">การเงินส่วนตัว</h1>
-          <p className="text-sm text-muted-foreground">เห็นได้เฉพาะคุณเท่านั้น</p>
-        </div>
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-end">
         <AddPersonalTransactionDialog currentUserId={currentUserId} />
       </div>
 
@@ -142,6 +140,36 @@ export function PersonalLedger({ currentUserId }: { currentUserId: string }) {
           ))}
         </section>
       ))}
+    </div>
+  );
+}
+
+export function PersonalLedger({ currentUserId }: { currentUserId: string }) {
+  const [view, setView] = useState<"transactions" | "assets">("transactions");
+
+  return (
+    <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
+      <div>
+        <h1 className="text-xl font-semibold">การเงินส่วนตัว</h1>
+        <p className="text-sm text-muted-foreground">เห็นได้เฉพาะคุณเท่านั้น</p>
+      </div>
+
+      <Tabs value={view} onValueChange={(v) => v && setView(v as "transactions" | "assets")}>
+        <TabsList className="w-full">
+          <TabsTrigger value="transactions" className="flex-1">
+            ธุรกรรม
+          </TabsTrigger>
+          <TabsTrigger value="assets" className="flex-1">
+            ทรัพย์สิน
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+
+      {view === "transactions" ? (
+        <TransactionsView currentUserId={currentUserId} />
+      ) : (
+        <AssetList currentUserId={currentUserId} />
+      )}
 
       <BottomNav />
     </div>

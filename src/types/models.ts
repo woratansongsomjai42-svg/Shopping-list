@@ -2,6 +2,7 @@ import type {
   Database,
   ExpenseCategory,
   MemberRole,
+  PersonalAssetType,
   PersonalTransactionType,
   ShoppingCategory,
   UrgencyLevel,
@@ -10,6 +11,7 @@ import type {
 export type {
   ExpenseCategory,
   MemberRole,
+  PersonalAssetType,
   PersonalTransactionType,
   ShoppingCategory,
   UrgencyLevel,
@@ -22,11 +24,13 @@ export type Expense = Database["public"]["Tables"]["expenses"]["Row"];
 export type ExpenseSplit = Database["public"]["Tables"]["expense_splits"]["Row"];
 
 export type PersonalTransaction = Database["public"]["Tables"]["personal_transactions"]["Row"];
+export type PersonalAsset = Database["public"]["Tables"]["personal_assets"]["Row"];
 
 export type NewShoppingItem = Database["public"]["Tables"]["shopping_items"]["Insert"];
 export type NewExpense = Database["public"]["Tables"]["expenses"]["Insert"];
 export type NewExpenseSplit = Database["public"]["Tables"]["expense_splits"]["Insert"];
 export type NewPersonalTransaction = Database["public"]["Tables"]["personal_transactions"]["Insert"];
+export type NewPersonalAsset = Database["public"]["Tables"]["personal_assets"]["Insert"];
 
 /** Balance owed between two members after netting all expense splits. */
 export interface SettlementBalance {
@@ -79,6 +83,16 @@ export const PERSONAL_EXPENSE_CATEGORIES = [
   "สุขภาพ",
   "อื่นๆ",
 ];
+
+export const PERSONAL_ASSET_TYPE_LABELS: Record<PersonalAssetType, string> = {
+  savings: "เงินฝาก/ออมทรัพย์",
+  stock: "หุ้น",
+  mutual_fund: "กองทุนรวม",
+  crypto: "คริปโต",
+  real_estate: "อสังหาริมทรัพย์",
+  gold: "ทองคำ",
+  other: "อื่นๆ",
+};
 
 /** Best-effort mapping used when pre-filling the convert-to-expense form. */
 export const SHOPPING_TO_EXPENSE_CATEGORY: Record<ShoppingCategory, ExpenseCategory> = {

@@ -25,6 +25,15 @@ export type ExpenseCategory =
 
 export type PersonalTransactionType = "income" | "expense";
 
+export type PersonalAssetType =
+  | "savings"
+  | "stock"
+  | "mutual_fund"
+  | "crypto"
+  | "real_estate"
+  | "gold"
+  | "other";
+
 export interface Database {
   public: {
     Tables: {
@@ -220,6 +229,32 @@ export interface Database {
         Update: Partial<Database["public"]["Tables"]["personal_transactions"]["Insert"]>;
         Relationships: [];
       };
+      personal_assets: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          type: PersonalAssetType;
+          invested_amount: number;
+          current_value: number;
+          note: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          type?: PersonalAssetType;
+          invested_amount?: number;
+          current_value?: number;
+          note?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["personal_assets"]["Insert"]>;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {
@@ -234,6 +269,7 @@ export interface Database {
       urgency_level: UrgencyLevel;
       expense_category: ExpenseCategory;
       personal_transaction_type: PersonalTransactionType;
+      personal_asset_type: PersonalAssetType;
     };
     CompositeTypes: Record<string, never>;
   };
