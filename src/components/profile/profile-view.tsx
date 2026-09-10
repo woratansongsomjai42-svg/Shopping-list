@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Settings, UserPlus } from "lucide-react";
+import { ArrowLeft, Mail, Settings, UserPlus } from "lucide-react";
 import Link from "next/link";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { AvatarUploader } from "@/components/profile/avatar-uploader";
@@ -27,7 +27,14 @@ export function ProfileView({
 }) {
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
-      <h1 className="text-xl font-semibold">โปรไฟล์</h1>
+      <div className="flex items-center gap-2">
+        <Link href="/shopping">
+          <Button variant="ghost" size="icon">
+            <ArrowLeft className="size-4" />
+          </Button>
+        </Link>
+        <h1 className="text-xl font-semibold">โปรไฟล์</h1>
+      </div>
 
       <Card>
         <CardContent className="flex flex-col items-center gap-4 text-center">
