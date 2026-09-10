@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { Wallet } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   Bar,
   BarChart,
@@ -16,9 +16,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { BottomNav } from "@/components/nav/bottom-nav";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   EXPENSE_CATEGORY_COLORS,
   EXPENSE_COLOR,
@@ -52,7 +50,7 @@ function lastSixMonthKeys() {
   return months;
 }
 
-function SharedDashboard({ householdId }: { householdId: string }) {
+export function SharedDashboard({ householdId }: { householdId: string }) {
   const { data: expenses = [], isLoading } = useQuery({
     queryKey: ["expenses", householdId],
     queryFn: () => getExpenses(householdId),
@@ -184,7 +182,7 @@ function SharedDashboard({ householdId }: { householdId: string }) {
   );
 }
 
-function PersonalDashboard() {
+export function PersonalDashboard() {
   const { data: transactions = [], isLoading } = useQuery({
     queryKey: ["personal-transactions"],
     queryFn: getPersonalTransactions,
@@ -331,35 +329,6 @@ function PersonalDashboard() {
           </div>
         </CardContent>
       </Card>
-    </div>
-  );
-}
-
-export function Dashboard({ householdId }: { householdId: string }) {
-  const [view, setView] = useState<"shared" | "personal">("shared");
-
-  return (
-    <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
-      <h1 className="text-xl font-semibold">สรุป</h1>
-
-      <Tabs value={view} onValueChange={(v) => v && setView(v as "shared" | "personal")}>
-        <TabsList className="w-full">
-          <TabsTrigger value="shared" className="flex-1">
-            ส่วนกลาง
-          </TabsTrigger>
-          <TabsTrigger value="personal" className="flex-1">
-            ส่วนตัว
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
-
-      {view === "shared" ? (
-        <SharedDashboard householdId={householdId} />
-      ) : (
-        <PersonalDashboard />
-      )}
-
-      <BottomNav />
     </div>
   );
 }
