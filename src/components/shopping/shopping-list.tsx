@@ -1,13 +1,11 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { ShoppingBasket, Settings, User } from "lucide-react";
-import Link from "next/link";
+import { ShoppingBasket } from "lucide-react";
 import { useMemo, useState } from "react";
 import { AddItemDialog } from "@/components/shopping/add-item-dialog";
 import { BottomNav } from "@/components/nav/bottom-nav";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { ConvertToExpenseDialog } from "@/components/shopping/convert-to-expense-dialog";
 import { ShoppingItemRow } from "@/components/shopping/shopping-item-row";
 import { useShoppingRealtime } from "@/hooks/use-shopping-realtime";
@@ -52,19 +50,7 @@ export function ShoppingList({
             <span className="text-sm text-muted-foreground">รายการ</span>
           </div>
         </div>
-        <div className="flex items-center gap-1">
-          <AddItemDialog householdId={householdId} currentUserId={currentUserId} />
-          <Link href="/settings">
-            <Button variant="ghost" size="icon" title="ตั้งค่าบ้าน">
-              <Settings className="size-4" />
-            </Button>
-          </Link>
-          <Link href="/profile">
-            <Button variant="ghost" size="icon" title="โปรไฟล์">
-              <User className="size-4" />
-            </Button>
-          </Link>
-        </div>
+        <AddItemDialog householdId={householdId} currentUserId={currentUserId} />
       </div>
 
       {isLoading && <p className="text-sm text-muted-foreground">กำลังโหลด...</p>}

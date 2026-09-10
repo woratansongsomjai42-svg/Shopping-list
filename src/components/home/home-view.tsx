@@ -6,13 +6,16 @@ import {
   ClipboardList,
   PiggyBank,
   Receipt,
+  Settings,
   TrendingUp,
+  User,
   Wallet,
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { PersonalDashboard, SharedDashboard } from "@/components/dashboard/dashboard";
 import { BottomNav } from "@/components/nav/bottom-nav";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getExpenses } from "@/lib/queries/expenses";
@@ -70,7 +73,21 @@ export function HomeView({ householdId }: { householdId: string }) {
 
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
-      <h1 className="text-xl font-semibold">หน้าแรก</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-semibold">หน้าแรก</h1>
+        <div className="flex items-center gap-1">
+          <Link href="/settings">
+            <Button variant="ghost" size="icon" title="ตั้งค่าบ้าน">
+              <Settings className="size-4" />
+            </Button>
+          </Link>
+          <Link href="/profile">
+            <Button variant="ghost" size="icon" title="โปรไฟล์">
+              <User className="size-4" />
+            </Button>
+          </Link>
+        </div>
+      </div>
 
       <div className="grid grid-cols-4 gap-2">
         {QUICK_LINKS.map(({ href, label, icon: Icon, tint }) => (
