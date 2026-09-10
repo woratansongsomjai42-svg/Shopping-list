@@ -33,7 +33,7 @@ export default async function SettingsPage() {
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-4 p-4 pb-24">
       <div className="flex items-center gap-2">
-        <Link href="/shopping">
+        <Link href="/">
           <Button variant="ghost" size="icon">
             <ArrowLeft className="size-4" />
           </Button>
