@@ -1,6 +1,6 @@
 "use client";
 
-import { ClipboardList, LayoutDashboard, PiggyBank, Receipt } from "lucide-react";
+import { CalendarDays, ClipboardList, LayoutDashboard, PiggyBank, Receipt } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ const TABS = [
   { href: "/shopping", label: "ของที่ต้องซื้อ", icon: ClipboardList },
   { href: "/expenses", label: "ส่วนกลาง", icon: Receipt },
   { href: "/personal", label: "ส่วนตัว", icon: PiggyBank },
+  { href: "/calendar", label: "ปฏิทิน", icon: CalendarDays },
   { href: "/dashboard", label: "สรุป", icon: LayoutDashboard },
 ] as const;
 

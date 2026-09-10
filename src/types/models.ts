@@ -25,12 +25,23 @@ export type ExpenseSplit = Database["public"]["Tables"]["expense_splits"]["Row"]
 
 export type PersonalTransaction = Database["public"]["Tables"]["personal_transactions"]["Row"];
 export type PersonalAsset = Database["public"]["Tables"]["personal_assets"]["Row"];
+export type Reminder = Database["public"]["Tables"]["reminders"]["Row"];
 
 export type NewShoppingItem = Database["public"]["Tables"]["shopping_items"]["Insert"];
 export type NewExpense = Database["public"]["Tables"]["expenses"]["Insert"];
 export type NewExpenseSplit = Database["public"]["Tables"]["expense_splits"]["Insert"];
 export type NewPersonalTransaction = Database["public"]["Tables"]["personal_transactions"]["Insert"];
 export type NewPersonalAsset = Database["public"]["Tables"]["personal_assets"]["Insert"];
+export type NewReminder = Database["public"]["Tables"]["reminders"]["Insert"];
+
+/** A Google Calendar event, fetched live and never persisted in our database. */
+export interface GoogleCalendarEvent {
+  id: string;
+  title: string;
+  date: string;
+  time: string | null;
+  htmlLink: string;
+}
 
 /** Balance owed between two members after netting all expense splits. */
 export interface SettlementBalance {

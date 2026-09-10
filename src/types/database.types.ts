@@ -257,6 +257,37 @@ export interface Database {
         Update: Partial<Database["public"]["Tables"]["personal_assets"]["Insert"]>;
         Relationships: [];
       };
+      reminders: {
+        Row: {
+          id: string;
+          household_id: string;
+          title: string;
+          note: string | null;
+          due_date: string;
+          due_time: string | null;
+          created_by: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          household_id: string;
+          title: string;
+          note?: string | null;
+          due_date: string;
+          due_time?: string | null;
+          created_by: string;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["reminders"]["Insert"]>;
+        Relationships: [
+          {
+            foreignKeyName: "reminders_household_id_fkey";
+            columns: ["household_id"];
+            referencedRelation: "households";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: {
